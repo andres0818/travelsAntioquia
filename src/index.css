@@ -1,0 +1,51 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --apple-bg: #000000;
+    --apple-card: rgba(28, 28, 30, 0.7);
+    --apple-border: rgba(255, 255, 255, 0.1);
+    --gta-accent: #05ff00; /* Neon Green like GTA V HUD */
+  }
+
+  body {
+    @apply bg-black text-white selection:bg-emerald-500/30;
+    font-feature-settings: "ss01", "ss02", "cv01", "cv11";
+    overflow-x: hidden;
+  }
+}
+
+@theme {
+  --color-gta-accent: var(--gta-accent);
+}
+
+@layer components {
+  .glass {
+    @apply backdrop-blur-xl bg-white/5 border border-white/10;
+  }
+  
+  .gta-panel {
+    @apply border-l-4 border-l-emerald-500 bg-black/80 backdrop-blur-md;
+  }
+
+  .gta-text-shadow {
+    text-shadow: 2px 2px 0px rgba(0,0,0,1);
+  }
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: black;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}

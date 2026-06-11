@@ -32,15 +32,18 @@ const MapAntioquia: React.FC<MapAntioquiaProps> = ({
   const projection = useMemo(() => {
     return geoMercator().fitSize([800, 800], {
       type: 'FeatureCollection',
-      // @ts-ignore
-      features: municipalities,
-    });
+      features: municipalities.map(m => ({
+        type: 'Feature',
+        geometry: m.geometry,
+        properties: m.properties
+      }))
+    } as any);
   }, [municipalities]);
 
   const pathGenerator = useMemo(() => geoPath().projection(projection), [projection]);
 
   return (
-    <div className="relative w-full h-full bg-black/40 rounded-[2rem] overflow-hidden">
+    <div className="relative w-full h-full bg-black/40 rounded-[2.5rem] overflow-hidden">
       <svg
         viewBox="0 0 800 800"
         className="w-full h-full p-4"

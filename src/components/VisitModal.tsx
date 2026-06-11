@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { X, Star, Upload, Trash2, CheckCircle2, MapPin, Calendar, Award, Image as ImageIcon } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import { cn } from '../lib/utils';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 interface VisitModalProps {
   townId: string;
@@ -24,7 +24,6 @@ interface Photo {
 }
 
 const VisitModal: React.FC<VisitModalProps> = ({ townId, townName, onClose, onUpdate }) => {
-  const [loading, setLoading] = useState(true);
   const [uploading, setUploading] = useState(false);
   const [visit, setVisit] = useState<VisitData | null>(null);
   const [photos, setPhotos] = useState<Photo[]>([]);
@@ -37,7 +36,6 @@ const VisitModal: React.FC<VisitModalProps> = ({ townId, townName, onClose, onUp
   }, [townId]);
 
   const fetchVisitData = async () => {
-    setLoading(true);
     try {
       const { data: visitData } = await supabase
         .from('visits')
@@ -64,8 +62,6 @@ const VisitModal: React.FC<VisitModalProps> = ({ townId, townName, onClose, onUp
       }
     } catch (err) {
       console.error('Error fetching visit data:', err);
-    } finally {
-      setLoading(false);
     }
   };
 
